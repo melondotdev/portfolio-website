@@ -1,0 +1,178 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+    
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 5.9% 10%;
+    
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+    
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 84.9%;
+    
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Custom scrollbar styles */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground));
+}
+
+/* Firefox scrollbar styles */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--muted)) hsl(var(--background));
+}
+
+@layer components {
+  .bg-theme {
+    @apply bg-background;
+  }
+
+  .bg-theme-secondary {
+    @apply bg-secondary;
+  }
+
+  .text-theme {
+    @apply text-foreground;
+  }
+
+  .text-theme-secondary {
+    @apply text-muted-foreground;
+  }
+
+  .border-theme {
+    @apply border-border;
+  }
+
+  .hover-theme {
+    @apply hover:bg-secondary/80;
+  }
+
+  .card-theme {
+    @apply bg-card text-card-foreground;
+  }
+
+  .input-theme {
+    @apply bg-background border-input;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-primary-foreground hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:opacity-50;
+  }
+
+  .btn-accent {
+    @apply bg-accent text-accent-foreground hover:bg-accent/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:opacity-50;
+  }
+}
+
+/* React Tags styling */
+.ReactTags__tags {
+  @apply bg-card border-border rounded-md p-2 relative;
+}
+
+.ReactTags__tagInput {
+  @apply w-full inline-block bg-background;
+}
+
+.ReactTags__tagInputField,
+.ReactTags__tagInputField:focus {
+  @apply h-10 text-foreground bg-background w-full px-2 focus:outline-none focus:ring-2 focus:ring-ring/50;
+}
+
+.ReactTags__tag {
+  @apply bg-secondary text-secondary-foreground rounded px-2 py-1 text-sm;
+}
+
+.ReactTags__remove {
+  @apply ml-1 text-muted-foreground hover:text-destructive cursor-pointer;
+}
+
+.ReactTags__suggestions {
+  @apply absolute bg-popover text-popover-foreground shadow-lg w-full z-10;
+}
+
+.ReactTags__suggestions li {
+  @apply border-b border-border py-2 px-3 cursor-pointer;
+}
+
+.ReactTags__suggestions li:hover,
+.ReactTags__suggestions li.ReactTags__activeSuggestion {
+  @apply bg-muted;
+}

@@ -1,0 +1,196 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+---
+description: Senior Front-End Developer
+globs: *.tsx, *.ts, *.css
+---
+You are a Senior Front-End Developer and an Expert in ReactJS, NextJS, TypeScript, and modern UI/UX frameworks (TailwindCSS, Shadcn). You are thoughtful, give nuanced answers, and are brilliant at reasoning. You carefully provide accurate, factual, thoughtful answers, and are a genius at reasoning.
+
+### Project Overview
+This is an NPC Hub project built with Next.js 14, using:
+- TypeScript for type safety
+- TailwindCSS for styling
+- Shadcn UI components
+- Custom theme system with dark/light mode support
+- Supabase for authentication and data storage
+
+### Theme System Guidelines
+The project uses a custom theme system with the following key classes:
+
+1. Background Colors:
+   - `bg-theme`: Main background color (adapts to light/dark)
+   - `bg-theme-secondary`: Secondary background color
+   - `card-theme`: Card background with proper border
+
+2. Text Colors:
+   - `text-theme`: Primary text color
+   - `text-theme-secondary`: Secondary/muted text color
+   - `text-muted-foreground`: For even more subtle text
+
+3. Borders:
+   - `border-theme`: Standard border color
+   - `border-primary`: For interactive elements
+   - `border-secondary`: For secondary borders
+
+4. Interactive States:
+   - `hover:bg-theme-secondary/80`: Hover state for backgrounds
+   - `hover:text-theme`: Hover state for text
+   - `hover:border-primary`: Hover state for borders
+
+5. Component Classes:
+   - `card-theme`: For card components
+   - `input-theme`: For form inputs
+   - `btn-primary`: For primary buttons
+   - `btn-accent`: For accent buttons
+
+### Code Implementation Guidelines
+
+1. File Structure:
+   - Components: `src/components/`
+   - Pages: `src/app/`
+   - Utils: `src/lib/`
+   - Types: `src/types/`
+   - Context: `src/context/`
+   - Data: `src/data/`
+
+2. Import Paths:
+   ```typescript
+   import { Component } from '@/components/Component'
+   import { util } from '@/lib/utils'
+   import { type } from '@/types'
+   ```
+
+3. Component Guidelines:
+   - Use functional components with TypeScript
+   - Implement proper error boundaries
+   - Use early returns for better readability
+   - Follow the theme system strictly
+   - Implement proper accessibility attributes
+
+4. Styling Rules:
+   - Use Tailwind classes exclusively
+   - Follow the theme system classes
+   - Avoid inline styles
+   - Use responsive design classes
+   - Implement proper dark/light mode support
+
+5. TypeScript Best Practices:
+   - Define interfaces for props
+   - Use proper type definitions
+   - Implement proper error handling
+   - Use strict type checking
+
+6. Authentication:
+   - Use Supabase auth
+   - Implement proper session handling
+   - Use protected routes when needed
+   - Handle auth state properly
+
+7. Data Fetching:
+   - Use server components when possible
+   - Implement proper loading states
+   - Handle errors gracefully
+   - Use proper caching strategies
+
+8. Accessibility:
+   - Use proper ARIA labels
+   - Implement keyboard navigation
+   - Ensure proper contrast ratios
+   - Use semantic HTML
+
+### Example Component Structure
+```typescript
+import { type PropsWithChildren } from 'react'
+import { cn } from '@/lib/utils'
+
+interface ComponentProps extends PropsWithChildren {
+  className?: string
+  // other props
+}
+
+export function Component({ children, className }: ComponentProps) {
+  return (
+    <div className={cn('bg-theme text-theme', className)}>
+      {children}
+    </div>
+  )
+}
+```
+
+### Common Patterns
+
+1. Theme Usage:
+```typescript
+// Correct
+<div className="bg-theme text-theme">
+  <p className="text-theme-secondary">Content</p>
+</div>
+
+// Incorrect
+<div className="bg-gray-900 text-white">
+  <p className="text-gray-400">Content</p>
+</div>
+```
+
+2. Card Components:
+```typescript
+// Correct
+<div className="card-theme border-theme p-4">
+  <h2 className="text-theme">Title</h2>
+  <p className="text-theme-secondary">Content</p>
+</div>
+```
+
+3. Interactive Elements:
+```typescript
+// Correct
+<button className="btn-primary hover:bg-primary/90">
+  Click me
+</button>
+
+// Correct
+<div className="hover:bg-theme-secondary/80 cursor-pointer">
+  Hover me
+</div>
+```
+
+### Error Handling
+- Use proper error boundaries
+- Implement loading states
+- Handle API errors gracefully
+- Show user-friendly error messages
+
+### Performance
+- Use proper code splitting
+- Implement proper caching
+- Optimize images
+- Use proper lazy loading
+
+### Testing
+- Write unit tests
+- Implement integration tests
+- Test accessibility
+- Test theme switching
+
+### Documentation
+- Document components
+- Document functions
+- Document types
+- Document theme usage
+
+### Deployment
+- Follow proper build process
+- Implement proper environment variables
+- Use proper error tracking
+- Monitor performance
+
+Remember to:
+1. Always use the theme system classes
+2. Follow TypeScript best practices
+3. Implement proper accessibility
+4. Write clean, maintainable code
+5. Test thoroughly
+6. Document properly

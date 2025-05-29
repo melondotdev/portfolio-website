@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/next"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/dashboard/course/(.*)",
+      "dest": "/dashboard/course/[id]"
+    },
+    {
+      "src": "/dashboard/course/(.*)/(.*)/(.*)",
+      "dest": "/dashboard/course/[id]/[moduleId]/[lessonId]"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ]
+} 
