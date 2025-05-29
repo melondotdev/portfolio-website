@@ -10,8 +10,8 @@ import { Toaster } from 'sonner';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Tech Jobs Canada',
-  description: 'Your career development platform',
+  title: 'melondotdev',
+  description: 'dev with one eye taped open',
 };
 
 export default function RootLayout({ children }: PropsWithChildren) {

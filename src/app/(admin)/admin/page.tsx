@@ -17,7 +17,7 @@ export default function DashboardPage() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
+  
   const fetchBlogPosts = useCallback(async () => {
     try {
       console.log('Fetching blog posts...');
