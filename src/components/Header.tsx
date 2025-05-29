@@ -1,7 +1,6 @@
 'use client';
 
 import { useTheme } from '@/context/ThemeContext';
-import { updatedCourses } from '@/data/courseContent';
 import { Menu, Moon, Sun } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
@@ -17,20 +16,12 @@ export default function Header({ isMobile = false, onMenuClick }: HeaderProps) {
   const { theme, toggleTheme } = useTheme();
 
   const getPageTitle = () => {
-    // Check if we're on a course page
-    const courseMatch = pathname.match(/^\/course\/([^/]+)/);
-    if (courseMatch) {
-      const courseId = courseMatch[1];
-      const course = updatedCourses.find((c) => c.id === courseId);
-      return course?.title || 'Course';
-    }
-
     switch (pathname) {
       default:
         return 'Content Management Dashboard';
     }
   };
-
+  
   return (
     <header className="bg-theme border-b border-theme px-4 sm:px-6 py-3 sm:py-4 z-20 backdrop-blur-lg bg-opacity-50">
       <div className="flex items-center justify-between">
