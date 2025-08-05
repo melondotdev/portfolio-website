@@ -1,10 +1,16 @@
 'use client';
 
 import { ThemeToggle } from '@/components/ThemeToggle';
-import { useState, useEffect } from 'react';
-import { ChevronLeft, Github, ExternalLink, Calendar, User, Tag } from 'lucide-react';
-import Link from 'next/link';
 import type { Project } from '@/lib/types/cms';
+import {
+  Calendar,
+  ChevronLeft,
+  ExternalLink,
+  Github,
+  User,
+} from 'lucide-react';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 export default function ProjectPage({ params }: { params: { id: string } }) {
   const [project, setProject] = useState<Project | null>(null);
@@ -51,8 +57,12 @@ export default function ProjectPage({ params }: { params: { id: string } }) {
       <div className="min-h-screen bg-background">
         <div className="container mx-auto px-4 pt-32 pb-16">
           <div className="text-center">
-            <h1 className="text-4xl font-bold text-foreground mb-4">Project Not Found</h1>
-            <p className="text-muted-foreground mb-8">The project you're looking for doesn't exist or has been removed.</p>
+            <h1 className="text-4xl font-bold text-foreground mb-4">
+              Project Not Found
+            </h1>
+            <p className="text-muted-foreground mb-8">
+              The project you're looking for doesn't exist or has been removed.
+            </p>
             <Link
               href="/projects"
               className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
@@ -80,7 +90,10 @@ export default function ProjectPage({ params }: { params: { id: string } }) {
                 <Link href="/projects" className="text-foreground">
                   Projects
                 </Link>
-                <Link href="/blog" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link
+                  href="/blog"
+                  className="text-muted-foreground hover:text-foreground transition-colors"
+                >
                   Blog
                 </Link>
               </nav>
@@ -173,13 +186,15 @@ export default function ProjectPage({ params }: { params: { id: string } }) {
 
           {/* Project Content */}
           <div className="prose prose-lg dark:prose-invert max-w-none mb-12">
-            <div dangerouslySetInnerHTML={{ __html: project.content }} />
+            {project.content}
           </div>
 
           {/* Technologies */}
           {project.technologies && project.technologies.length > 0 && (
             <div className="mb-12">
-              <h2 className="text-2xl font-semibold text-foreground mb-4">Technologies Used</h2>
+              <h2 className="text-2xl font-semibold text-foreground mb-4">
+                Technologies Used
+              </h2>
               <div className="flex flex-wrap gap-2">
                 {project.technologies.map((tech) => (
                   <span
@@ -196,7 +211,9 @@ export default function ProjectPage({ params }: { params: { id: string } }) {
           {/* Tags */}
           {project.tags && project.tags.length > 0 && (
             <div className="mb-12">
-              <h2 className="text-2xl font-semibold text-foreground mb-4">Tags</h2>
+              <h2 className="text-2xl font-semibold text-foreground mb-4">
+                Tags
+              </h2>
               <div className="flex flex-wrap gap-2">
                 {project.tags.map((tag) => (
                   <span
@@ -213,7 +230,9 @@ export default function ProjectPage({ params }: { params: { id: string } }) {
           {/* Metadata */}
           {project.metadata && Object.keys(project.metadata).length > 0 && (
             <div className="mb-12">
-              <h2 className="text-2xl font-semibold text-foreground mb-4">Additional Information</h2>
+              <h2 className="text-2xl font-semibold text-foreground mb-4">
+                Additional Information
+              </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {Object.entries(project.metadata).map(([key, value]) => (
                   <div key={key} className="bg-card p-4 rounded-lg">
@@ -228,4 +247,4 @@ export default function ProjectPage({ params }: { params: { id: string } }) {
       </div>
     </div>
   );
-} 
+}

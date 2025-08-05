@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/context/ThemeContext';
-import { SessionProvider } from '@/lib/providers/SessionProvider';
 import type { PropsWithChildren } from 'react';
 import { Toaster } from 'sonner';
 
@@ -11,7 +10,7 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'melondotdev',
-  description: 'dev with one eye taped open',
+  description: 'behold the truly exceptional works of melondotdev',
 };
 
 export default function RootLayout({ children }: PropsWithChildren) {
@@ -19,10 +18,8 @@ export default function RootLayout({ children }: PropsWithChildren) {
     <html lang="en">
       <body className={inter.className}>
         <ThemeProvider>
-          <SessionProvider>
-            {children}
-            <Toaster />
-          </SessionProvider>
+          {children}
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
