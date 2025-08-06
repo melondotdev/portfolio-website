@@ -22,14 +22,9 @@ export default function BlogPostPage() {
     async function fetchBlogPost() {
       try {
         console.log('Fetching blog post with slug:', slug);
-        const baseUrl =
-          process.env.NODE_ENV === 'development'
-            ? 'http://localhost:3000'
-            : process.env.NEXT_PUBLIC_SITE_URL ||
-              'https://tech-jobs-canada.vercel.app';
 
         const data = await fetchWithRetry(
-          `${baseUrl}/api/blog/${slug}`,
+          `/api/blog/${slug}`,
           3,
           1000,
           (attempt) => {
