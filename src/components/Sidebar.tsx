@@ -1,11 +1,5 @@
 'use client';
-import {
-  BookOpen,
-  ChevronLeft,
-  ChevronRight,
-  X,
-  Sparkles,
-} from 'lucide-react';
+import { BookOpen, ChevronLeft, ChevronRight, X } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
@@ -76,7 +70,7 @@ export default function Sidebar({ isMobile = false, onClose }: SidebarProps) {
                   ? 'bg-theme-secondary text-theme'
                   : 'text-theme-secondary hover:text-theme hover-theme'
               } ${isExpanded ? '' : 'justify-center'}`}
-              onClick={(e) => {
+              onClick={() => {
                 if (isMobile && onClose) {
                   onClose();
                 }

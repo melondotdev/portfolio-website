@@ -56,9 +56,9 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {loading
               ? // Loading skeleton
-                Array.from({ length: 6 }).map((_, i) => (
+                Array.from({ length: 6 }).map((_) => (
                   <div
-                    key={`skeleton-${i}`}
+                    key={`skeleton-${crypto.randomUUID()}`}
                     className="bg-card rounded-lg shadow-md p-6 animate-pulse"
                   >
                     <div className="h-4 bg-muted rounded w-3/4 mb-4" />
