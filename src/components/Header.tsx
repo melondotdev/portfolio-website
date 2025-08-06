@@ -36,7 +36,7 @@ export function Header({ activePage = 'projects' }: HeaderProps) {
                     : 'text-muted-foreground hover:text-foreground transition-colors'
                 }
               >
-                Projects
+                projects
               </Link>
               <Link
                 href="/blog"
@@ -46,7 +46,7 @@ export function Header({ activePage = 'projects' }: HeaderProps) {
                     : 'text-muted-foreground hover:text-foreground transition-colors'
                 }
               >
-                Blog
+                blog
               </Link>
             </nav>
           </div>

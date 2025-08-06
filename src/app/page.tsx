@@ -133,7 +133,7 @@ export default function Home() {
         <div className="container mx-auto px-4 py-8">
           <div className="flex items-center justify-between">
             <div className="text-sm text-muted-foreground">
-              © {new Date().getFullYear()} melondotdev. All rights reserved.
+              © {new Date().getFullYear()} melondotdev. all rights reserved.
             </div>
           </div>
         </div>
