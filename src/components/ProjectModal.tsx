@@ -1,7 +1,7 @@
+import { MarkdownContent } from '@/components/blog/MarkdownContent';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
-import { Github, ExternalLink, Calendar, User, X } from 'lucide-react';
 import type { Project } from '@/lib/types/cms';
-import { Button } from '@/components/ui/button';
+import { Calendar, ExternalLink, Github, User } from 'lucide-react';
 
 interface ProjectModalProps {
   project: Project | null;
@@ -16,16 +16,6 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
         <div className="relative">
-          {/* Close Button */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="absolute right-0 top-0"
-            onClick={onClose}
-          >
-            <X className="h-4 w-4" />
-          </Button>
-
           {/* Project Header */}
           <div className="mb-8">
             <h2 className="text-3xl font-bold text-foreground mb-4">
@@ -34,7 +24,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
             <div className="flex flex-wrap gap-4 items-center text-muted-foreground">
               <div className="flex items-center gap-2">
                 <User className="w-4 h-4" />
-                <span>{project.author_id}</span>
+                <span>melondotdev</span>
               </div>
               <div className="flex items-center gap-2">
                 <Calendar className="w-4 h-4" />
@@ -96,14 +86,16 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
           )}
 
           {/* Project Content */}
-          <div className="prose prose-lg dark:prose-invert max-w-none mb-8">
-            <div dangerouslySetInnerHTML={{ __html: project.content }} />
+          <div className="mb-8">
+            <MarkdownContent content={project.content || ''} />
           </div>
 
           {/* Technologies */}
           {project.technologies && project.technologies.length > 0 && (
             <div className="mb-8">
-              <h3 className="text-xl font-semibold text-foreground mb-4">Technologies Used</h3>
+              <h3 className="text-xl font-semibold text-foreground mb-4">
+                Technologies Used
+              </h3>
               <div className="flex flex-wrap gap-2">
                 {project.technologies.map((tech) => (
                   <span
@@ -120,7 +112,9 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
           {/* Tags */}
           {project.tags && project.tags.length > 0 && (
             <div className="mb-8">
-              <h3 className="text-xl font-semibold text-foreground mb-4">Tags</h3>
+              <h3 className="text-xl font-semibold text-foreground mb-4">
+                Tags
+              </h3>
               <div className="flex flex-wrap gap-2">
                 {project.tags.map((tag) => (
                   <span
@@ -137,7 +131,9 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
           {/* Metadata */}
           {project.metadata && Object.keys(project.metadata).length > 0 && (
             <div>
-              <h3 className="text-xl font-semibold text-foreground mb-4">Additional Information</h3>
+              <h3 className="text-xl font-semibold text-foreground mb-4">
+                Additional Information
+              </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {Object.entries(project.metadata).map(([key, value]) => (
                   <div key={key} className="bg-card p-4 rounded-lg">
@@ -152,4 +148,4 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
       </DialogContent>
     </Dialog>
   );
-} 
+}

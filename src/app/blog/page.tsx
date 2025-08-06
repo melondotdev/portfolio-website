@@ -55,9 +55,9 @@ export default function BlogPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {loading
               ? // Loading skeleton
-                Array.from({ length: 6 }).map((_, i) => (
+                Array.from({ length: 6 }).map((_) => (
                   <div
-                    key={i}
+                    key={`skeleton-item-${Math.random().toString(36)}`}
                     className="bg-card rounded-lg shadow-md p-6 animate-pulse"
                   >
                     <div className="h-4 bg-muted rounded w-3/4 mb-4" />
@@ -87,10 +87,10 @@ export default function BlogPage() {
                         </h2>
                         <p className="text-sm text-muted-foreground mb-4">
                           {post.excerpt ||
-                            post.content.substring(0, 100) + '...'}
+                            `${post.content.substring(0, 100)}...`}
                         </p>
                         <div className="flex items-center justify-between text-sm text-muted-foreground">
-                          <span>{post.author_id}</span>
+                          <span>melondotdev</span>
                           <span>
                             {new Date(post.created_at).toLocaleDateString(
                               'en-US',

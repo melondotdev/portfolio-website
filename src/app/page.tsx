@@ -101,7 +101,7 @@ export default function Home() {
                           ))}
                         </div>
                         <div className="flex items-center justify-between text-sm text-muted-foreground mt-auto">
-                          <span>{project.author_id}</span>
+                          <span>melondotdev</span>
                           <span>
                             {new Date(project.created_at).toLocaleDateString(
                               'en-US',
