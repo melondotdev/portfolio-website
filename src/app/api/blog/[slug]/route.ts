@@ -4,11 +4,11 @@ import { NextResponse } from 'next/server';
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: { slug: string } },
 ) {
   try {
-    console.log('Fetching blog post with ID:', params.id);
-    
+    console.log('Fetching blog post with slug:', params.slug);
+
     const cookieStore = cookies();
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
     const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
@@ -17,27 +17,23 @@ export async function GET(
       console.error('Missing Supabase environment variables');
       return NextResponse.json(
         { error: 'Server configuration error' },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
-    const supabase = createServerClient(
-      supabaseUrl,
-      supabaseAnonKey,
-      {
-        cookies: {
-          get(name: string) {
-            return cookieStore.get(name)?.value;
-          },
+    const supabase = createServerClient(supabaseUrl, supabaseAnonKey, {
+      cookies: {
+        get(name: string) {
+          return cookieStore.get(name)?.value;
         },
-      }
-    );
+      },
+    });
 
     console.log('Executing database query...');
     const { data: blog, error } = await supabase
       .from('blog_posts')
       .select('*')
-      .eq('id', params.id)
+      .eq('slug', params.slug)
       .single();
 
     if (error) {
@@ -45,19 +41,19 @@ export async function GET(
         code: error.code,
         message: error.message,
         details: error.details,
-        hint: error.hint
+        hint: error.hint,
       });
       return NextResponse.json(
         { error: 'Failed to fetch blog post', details: error.message },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
     if (!blog) {
-      console.log('No blog post found with ID:', params.id);
+      console.log('No blog post found with slug:', params.slug);
       return NextResponse.json(
         { error: 'Blog post not found' },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -66,15 +62,18 @@ export async function GET(
   } catch (error) {
     console.error('Unexpected error in blog/[id] GET:', error);
     return NextResponse.json(
-      { error: 'Internal server error', details: error instanceof Error ? error.message : 'Unknown error' },
-      { status: 500 }
+      {
+        error: 'Internal server error',
+        details: error instanceof Error ? error.message : 'Unknown error',
+      },
+      { status: 500 },
     );
   }
 }
 
 export async function PUT(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: { slug: string } },
 ) {
   try {
     const cookieStore = cookies();
@@ -87,7 +86,7 @@ export async function PUT(
             return cookieStore.get(name)?.value;
           },
         },
-      }
+      },
     );
 
     const body = await request.json();
@@ -95,7 +94,7 @@ export async function PUT(
     const { data: blog, error } = await supabase
       .from('blog_posts')
       .update(body)
-      .eq('id', params.id)
+      .eq('slug', params.slug)
       .select()
       .single();
 
@@ -103,7 +102,7 @@ export async function PUT(
       console.error('Error updating blog post:', error);
       return NextResponse.json(
         { error: 'Failed to update blog post' },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
@@ -112,14 +111,14 @@ export async function PUT(
     console.error('Error in blog/[id] PUT:', error);
     return NextResponse.json(
       { error: 'Internal server error' },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
 
 export async function DELETE(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: { slug: string } },
 ) {
   try {
     const cookieStore = cookies();
@@ -132,19 +131,19 @@ export async function DELETE(
             return cookieStore.get(name)?.value;
           },
         },
-      }
+      },
     );
 
     const { error } = await supabase
       .from('blog_posts')
       .delete()
-      .eq('id', params.id);
+      .eq('slug', params.slug);
 
     if (error) {
       console.error('Error deleting blog post:', error);
       return NextResponse.json(
         { error: 'Failed to delete blog post' },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
@@ -153,7 +152,7 @@ export async function DELETE(
     console.error('Error in blog/[id] DELETE:', error);
     return NextResponse.json(
       { error: 'Internal server error' },
-      { status: 500 }
+      { status: 500 },
     );
   }
-} 
+}

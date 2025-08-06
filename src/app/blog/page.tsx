@@ -12,10 +12,19 @@ export default function BlogPage() {
   useEffect(() => {
     async function fetchBlogPosts() {
       try {
+        console.log('Fetching blog posts...');
         const response = await fetch('/api/blog');
+        console.log('Response status:', response.status);
         if (response.ok) {
           const data = await response.json();
+          console.log('Blog posts data:', data);
           setPosts(data || []);
+        } else {
+          console.error(
+            'Failed to fetch blog posts:',
+            response.status,
+            response.statusText,
+          );
         }
       } catch (error) {
         console.error('Error fetching blog posts:', error);
@@ -68,7 +77,7 @@ export default function BlogPage() {
               : posts.map((post) => (
                   <Link
                     key={post.id}
-                    href={`/blog/${post.id}`}
+                    href={`/blog/${post.slug}`}
                     className="block bg-card rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
                   >
                     <article>

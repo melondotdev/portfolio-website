@@ -2,24 +2,16 @@
 
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { MarkdownContent } from '@/components/blog/MarkdownContent';
-import type { Page } from '@/lib/types/cms';
+import type { BlogPost } from '@/lib/types/cms';
 import { fetchWithRetry } from '@/lib/utils/fetch';
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-interface BlogPost extends Page {
-  metadata: {
-    category?: string;
-    readTime?: string;
-  };
-  authorName: string;
-}
-
 export default function BlogPostPage() {
   const params = useParams();
-  const id = params.id as string;
+  const slug = params.slug as string;
 
   const [blogPost, setBlogPost] = useState<BlogPost | null>(null);
   const [loading, setLoading] = useState(true);
@@ -29,6 +21,7 @@ export default function BlogPostPage() {
   useEffect(() => {
     async function fetchBlogPost() {
       try {
+        console.log('Fetching blog post with slug:', slug);
         const baseUrl =
           process.env.NODE_ENV === 'development'
             ? 'http://localhost:3000'
@@ -36,7 +29,7 @@ export default function BlogPostPage() {
               'https://tech-jobs-canada.vercel.app';
 
         const data = await fetchWithRetry(
-          `${baseUrl}/api/blog/${id}`,
+          `${baseUrl}/api/blog/${slug}`,
           3,
           1000,
           (attempt) => {
@@ -44,9 +37,11 @@ export default function BlogPostPage() {
           },
         );
 
+        console.log('Blog post data:', data);
         setBlogPost(data);
         setError(null);
       } catch (err) {
+        console.error('Error fetching blog post:', err);
         setError(err instanceof Error ? err.message : 'An error occurred');
       } finally {
         setLoading(false);
@@ -54,7 +49,7 @@ export default function BlogPostPage() {
     }
 
     fetchBlogPost();
-  }, [id]);
+  }, [slug]);
 
   if (loading) {
     return (
@@ -87,8 +82,8 @@ export default function BlogPostPage() {
 
   const category = blogPost.metadata?.category as string | undefined;
   const readTime = blogPost.metadata?.readTime as string | undefined;
-  const authorName = blogPost.authorName || 'Anonymous';
-  const createdAt = new Date(blogPost.createdAt).toLocaleDateString('en-US', {
+  const authorName = 'melondotdev'; // Since author_id is stored, we'll use a default name
+  const createdAt = new Date(blogPost.created_at).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
