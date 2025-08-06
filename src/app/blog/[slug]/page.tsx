@@ -2,6 +2,7 @@
 
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { MarkdownContent } from '@/components/blog/MarkdownContent';
+import { VideoEmbed } from '@/components/blog/VideoEmbed';
 import type { BlogPost } from '@/lib/types/cms';
 import { fetchWithRetry } from '@/lib/utils/fetch';
 import { ArrowLeft } from 'lucide-react';
@@ -116,6 +117,9 @@ export default function BlogPostPage() {
             </div>
           </div>
 
+          {blogPost.video_link && (
+            <VideoEmbed videoUrl={blogPost.video_link} title={blogPost.title} />
+          )}
           <MarkdownContent content={blogPost.content || ''} />
         </article>
       </div>

@@ -25,6 +25,7 @@ export type BlogPost = {
   content: string;
   excerpt?: string;
   cover_image?: string;
+  video_link?: string;
   author_id: string;
   published: boolean;
   published_at?: string;

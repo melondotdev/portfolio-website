@@ -6,6 +6,7 @@ INSERT INTO public.blog_posts (
     content,
     excerpt,
     cover_image,
+    video_link,
     author_id,
     published,
     published_at,
@@ -42,6 +43,8 @@ Supabase offers a powerful backend with:
    - Markdown support
    - Image uploads
 
+![Modern development workspace](https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&q=80&w=600)
+
 2. **Authentication**
    - Secure login
    - Role-based access
@@ -73,6 +76,7 @@ Building this portfolio has been a great learning experience. The combination of
 Stay tuned for more posts about specific features and implementation details!',
     'A deep dive into building a modern portfolio website using Next.js 14 and Supabase, exploring key features, challenges, and solutions.',
     'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&q=80&w=600',
+    'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
     (SELECT id FROM auth.users WHERE email = 'admin@example.com'),
     true,
     CURRENT_TIMESTAMP,

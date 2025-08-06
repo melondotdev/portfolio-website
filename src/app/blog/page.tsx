@@ -2,6 +2,7 @@
 
 import { Header } from '@/components/Header';
 import type { BlogPost } from '@/lib/types/cms';
+import { Play } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
@@ -88,6 +89,11 @@ export default function BlogPage() {
                             alt={post.title}
                             className="object-cover w-full h-full"
                           />
+                          {post.video_link && (
+                            <div className="absolute top-2 right-2 bg-black/70 text-white p-2 rounded-full">
+                              <Play className="w-4 h-4" />
+                            </div>
+                          )}
                         </div>
                       )}
                       <div className="p-6">

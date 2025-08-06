@@ -1,5 +1,6 @@
 'use client';
 
+import { getImageAltText, getOptimizedImageUrl } from '@/lib/utils/images';
 import type { HTMLAttributes } from 'react';
 import type { Components } from 'react-markdown';
 import { CodeBlock } from './CodeBlock';
@@ -57,9 +58,19 @@ export const markdownComponents: Components = {
       {children}
     </a>
   ),
-  img: ({ src, alt }) => (
-    <img src={src} alt={alt} className="rounded-lg my-4 max-w-full h-auto" />
-  ),
+  img: ({ src, alt }) => {
+    const optimizedSrc = getOptimizedImageUrl(src || '');
+    const altText = alt || getImageAltText(src || '');
+
+    return (
+      <img
+        src={optimizedSrc}
+        alt={altText}
+        className="rounded-lg my-8 w-full h-64 md:h-80 object-cover shadow-lg"
+        loading="lazy"
+      />
+    );
+  },
   strong: ({ children }) => <strong className="font-bold">{children}</strong>,
   pre: ({ children }) => <pre className="my-4">{children}</pre>,
 };
